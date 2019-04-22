@@ -40,8 +40,8 @@ PRIME <- function(sc_cnt, max_it = 5, alp = 1, err_max = 0.05){
     sc_data_prev <- sc_data_imputed
 
     seurat <- CreateSeuratObject(counts = sc_data_prev, min.cells = 0, min.features = 0)
-    seurat <- FindVariableGenes(object = seurat, mean.function = ExpMean, dispersion.function = LogVMR,
-                                x.low.cutoff = 1, x.high.cutoff = 10, y.cutoff = 1, do.plot = F, display.progress = F)
+    seurat <- FindVariableFeatures(object = seurat, selection.method = 'vst') 
+    
     var_genes <- seurat@var.genes
 
     sel_data <- sc_data_prev[var_genes,]
