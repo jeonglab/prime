@@ -42,7 +42,7 @@ PRIME <- function(sc_cnt, max_it = 5, alp = 1, err_max = 0.05){
     seurat <- CreateSeuratObject(counts = sc_data_prev, min.cells = 0, min.features = 0)
     seurat <- FindVariableFeatures(object = seurat, selection.method = 'vst') 
     
-    var_genes <- seurat@var.genes
+    var_genes <- seurat@assays$RNA@var.features
 
     sel_data <- sc_data_prev[var_genes,]
     sel_data <- apply(sel_data, 2, as.numeric)
